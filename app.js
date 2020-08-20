@@ -1,3 +1,8 @@
+var config = require('./config.dev');
+
+//Test the file
+// console.log(config);
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
