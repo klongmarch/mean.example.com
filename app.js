@@ -7,7 +7,9 @@ var mongoose = require('mongoose');
 //Connect to MongoDB
 mongoose.connect(config.mongodb, { useNewUrlParser: true });
 
+var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
+var Users = require('./models/users');
 var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
 
@@ -52,6 +54,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+passport.use(Users.createStrategy());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
