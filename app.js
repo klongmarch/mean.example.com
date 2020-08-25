@@ -7,6 +7,10 @@ var mongoose = require('mongoose');
 //Connect to MongoDB
 mongoose.connect(config.mongodb, { useNewUrlParser: true });
 
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
+var passport = require('passport');
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
