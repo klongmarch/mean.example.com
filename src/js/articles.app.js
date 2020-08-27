@@ -1,6 +1,6 @@
 function viewArticles(){
 
-  let uri = `${window.location.origin}/api/users`;
+  let uri = `${window.location.origin}/api/articles`;
   let xhr = new XMLHttpRequest();
   xhr.open('GET', uri);
 
@@ -14,38 +14,38 @@ function viewArticles(){
   xhr.onload = function(){
     let app = document.getElementById('app');
     let data = JSON.parse(xhr.response);
-    let users = data.users;
+    let articles = data.articles;
     let table = '';
     let rows = '';
   
-    //Loop each user record into it's own HTML table row, each user should
-    //have a link a user view
-    for (let i=0; i<users.length; i++) {
+    //Loop each article record into it's own HTML table row, each article should
+    //have a link a article view
+    for (let i=0; i<articles.length; i++) {
       rows = rows + `<tr>
         <td>
-          <a href="#view-${users[i]['_id']}">${users[i]['last_name']}, ${users[i]['first_name']}</a>
+          <a href="#view-${articles[i]['_id']}">${articles[i]['title']}</a>
         </td>
-        <td>${users[i]['username']}</td>
-        <td>${users[i]['email']}</td>
+        <td>${articles[i]['slug']}</td>
+        <td>${articles[i]['description']}</td>
       </tr>`;
     }
   
-    //Create a users panel, add a table to the panel, inject the rows into the
+    //Create a articles panel, add a table to the panel, inject the rows into the
     //table
     table = `<div class="card">
       <div class="card-header clearfix">
-        <h2 class="h3 float-left">Users</h2>
+        <h2 class="h3 float-left">Articles</h2>
         <div class="float-right">
-          <a href="#create" class="btn btn-primary">New User</a>
+          <a href="#create" class="btn btn-primary">New Articles</a>
         </div>
       </div>
       <div class="table-responsive">
         <table class="table table-striped table-hover table-bordered">
           <thead>
             <tr>
-              <td>Name</td>
-              <td>Username</td>
-              <td>Email</td>
+              <td>Title</td>
+              <td>Slug</td>
+              <td>Description</td>
             </tr>
           </thead>
           <tbody>${rows}</tbody>
@@ -351,8 +351,7 @@ var articlesApp = (function() {
 
   return {
     load: function(){
-      alert('LOADED');
-return;
+//      alert('LOADED');
       let hash = window.location.hash;
       let hashArray = hash.split('-');
     
