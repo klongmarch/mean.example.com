@@ -56,19 +56,19 @@ router.put('/', function(req, res){
     };
 
     if(data.slug){
-    user.slug = data.slug;
+    article.slug = data.slug;
     };
 
     if(data.keywords){
-    user.keywords = data.keywords;
+    article.keywords = data.keywords;
     };
 
     if(data.body){
-    user.body = data.body;
+    article.body = data.body;
     };
 
     if(data.description){
-    user.description = data.description;
+    article.description = data.description;
     };
 
     article.save(function(err){
