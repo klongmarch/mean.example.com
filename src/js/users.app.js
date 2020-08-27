@@ -206,10 +206,12 @@ function editUser(id){
     `;
   
     app.innerHTML=form;
+    processRequest('editUser', '/api/users', 'PUT');
   }
 }
 
-function postRequest(formId, url){
+function processRequest(formId, url, method){
+
   let form = document.getElementById(formId);
   form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -217,7 +219,7 @@ function postRequest(formId, url){
     let formData = new FormData(form);
     let uri = `${window.location.origin}${url}`;
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', uri);function viewUser(id){
+    xhr.open(method, uri);function viewUser(id){
 
       let uri = `${window.location.origin}/api/users/${id}`;
       let xhr = new XMLHttpRequest();
@@ -283,7 +285,7 @@ var usersApp = (function() {
       switch(hashArray[0]){
         case '#create':
           createUser();
-          postRequest('createUser', '/api/users');
+          processRequest('createUser', '/api/users', 'POST');
           break;
     
         case '#view':
