@@ -58,6 +58,18 @@ gulp.task('build-users-js', function() {
   return merge(userApp);
 });
 
+gulp.task('build-articles-js', function() {
+
+  var articleApp = gulp.src([
+    'src/js/articles.app.js',
+  ])
+  .pipe(concat('articles.app.min.js'))
+  .pipe(uglify())
+  .pipe(gulp.dest('public/dist/js'));
+
+  return merge(articleApp);
+});
+
 gulp.task('watch', function(){
   gulp.watch('./src/scss/**/*.scss', gulp.series('build-css'));
   gulp.watch('./src/js/**/*.js', gulp.series('build-js'));
@@ -73,5 +85,6 @@ gulp.task('build-css', gulp.series('build-main-css'));
 gulp.task('build-js', gulp.series(
     'build-main-js',
     'build-auth-js',
+    'build-articles-js',
     'build-users-js'
   ));
